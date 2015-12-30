@@ -59,6 +59,9 @@
 #
 # [*manage_client_jar*]
 #   Should the class download the client jar file from the web? Defaults to true.
+#
+# [*disable_client_uniqueid*]
+#   Disable client unique id
 
 # === Examples
 #
@@ -97,6 +100,7 @@ class jenkins::slave (
   $ensure                   = 'running',
   $enable                   = true,
   $source                   = undef,
+  $disable_client_uniqueid  = false
 ) inherits jenkins::params {
 
   validate_string($tool_locations)

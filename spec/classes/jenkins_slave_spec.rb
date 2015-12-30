@@ -17,6 +17,17 @@ describe 'jenkins::slave' do
       it { should contain_file(slave_runtime_file).with_content(/-disableSslVerification/) }
     end
 
+    describe 'with client unique id disabled' do
+      let(:params) { { :disable_client_uniqueid => true } }
+      it { should contain_file(slave_runtime_file).with_content(/-disableClientsUniqueId/) }
+    end
+
+    describe 'with client unique id disabled and ssl veritfication disabled' do
+      let(:params) { { :disable_client_uniqueid => true, :disable_ssl_verification => true } }
+      it { should contain_file(slave_runtime_file).with_content(/-disableClientsUniqueId/) }
+      it { should contain_file(slave_runtime_file).with_content(/-disableSslVerification/) }
+    end
+
     describe 'with auto discovery address' do
        let(:params) { { :autodiscoveryaddress => '255.255.255.0' } }
        it { should contain_file(slave_runtime_file).with_content(/^AUTO_DISCOVERY_ADDRESS="255.255.255.0"$/) }
